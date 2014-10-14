@@ -83,7 +83,7 @@ JAVASCRIPT_TEST_FILE_NAME=$3
 JAVASCRIPT_TEST_FILES_DIRECTORY=$4
 TEST_RESULTS_OUTPUT_PATH=$5
 
-
+pwd=$(pwd)
 
 # ===== FUNCTIONS =====
 
@@ -289,7 +289,8 @@ _run_automation_instrument() {
 
     # Switch directory into the output directly, b/c otherwise, occasionally,
     # Instruments will dump a .trace file in the directory from which this script is launched.
-    cd ${test_results_output_path}
+    #cd ${test_results_output_path}
+    cd ${pwd}
 
     if [ ${DEBUG_MODE_ENABLED} -eq 1 ]; then
         echo "-----------------------------------------------------------------------------------------------------------------------"
