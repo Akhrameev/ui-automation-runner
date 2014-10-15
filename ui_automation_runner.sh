@@ -316,6 +316,24 @@ _run_automation_instrument() {
 
     # Invoke the actual instruments command:
     eval ${instruments_command}
+    local traceDir=${test_results_output_path}
+    traceDir+="/instrumentscli*"
+    local traceCountFiles=0
+    for path in ${traceDir}; do
+    	[ -d "${path}" ] || continue # if not a directory, skip
+    	((++traceCountFiles))
+	done
+    echo ${traceCountFiles}
+    traceDir=${pwd}
+    traceDir+="/instrumentscli*"
+    for path in ${traceDir}; do
+    	[ -d "${path}" ] || continue # if not a directory, skip
+    	((++traceCountFiles))
+    	local renamedTrace=${path}
+    	renamedTrace+="_$traceCountFiles.trace"
+    	mv $path ${renamedTrace}
+    	mv ${renamedTrace} ${test_results_output_path}
+	done
 }
 
 
